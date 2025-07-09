@@ -69,3 +69,12 @@ if submitted:
         st.warning("Hasil prediksi menunjukkan risiko Dengue yang tinggi. Pertimbangkan konfirmasi diagnosis dengan pemeriksaan klinis dan serologis.")
     else:
         st.success("Hasil prediksi menunjukkan risiko Dengue yang rendah. Tetap lakukan monitoring sesuai protokol klinis.")
+        
+        # Footer identitas pengembang
+st.markdown("""
+---
+**Pengembang:**  
+dr. Suhendra Mandala Ernas  
+**Institusi:**  
+RSUD dr. Soetomo Surabaya
+""")
