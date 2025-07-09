@@ -12,7 +12,7 @@ with open('belajar_dengue_scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Judul dan deskripsi
-st.title("Prediksi Probabilitas Infeksi Dengue Berdasarkan Parameter Hematologi")
+st.title("Prediksi Infeksi Dengue Berdasarkan Parameter Hematologi")
 
 st.markdown("""
 Aplikasi ini dikembangkan untuk memprediksi kemungkinan terjadinya Infeksi Dengue
