@@ -12,7 +12,7 @@ with open('belajar_dengue_scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Judul dan deskripsi
-st.title("Prediksi Probabilitas Infeksi Dengue Berdasarkan Parameter Hematologi")
+st.title("Prediksi Infeksi Dengue Berdasarkan Parameter Hematologi")
 
 st.markdown("""
 Aplikasi ini dikembangkan untuk memprediksi kemungkinan terjadinya infeksi Dengue 
@@ -36,7 +36,7 @@ with st.form("input_form"):
     MCH = st.number_input("MCH (pg)", min_value=15.0, max_value=45.0, value=28.0)
     MCHC = st.number_input("MCHC (%)", min_value=20.0, max_value=40.0, value=33.0)
 
-    submitted = st.form_submit_button("Lakukan Prediksi")
+    submitted = st.form_submit_button("Prediksi")
 
 if submitted:
     # Data input
