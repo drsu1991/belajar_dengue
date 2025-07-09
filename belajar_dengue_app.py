@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 
-# Load model BELAJAR DENGUE
+# Load model
 with open('belajar_dengue_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
@@ -11,14 +11,19 @@ with open('belajar_dengue_model.pkl', 'rb') as f:
 with open('belajar_dengue_scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
-# Judul aplikasi
-st.title("🩸 Prediksi Dengue - Model BELAJAR DENGUE")
+# Judul dan deskripsi
+st.title("Prediksi Probabilitas Infeksi Dengue Berdasarkan Parameter Hematologi")
+
 st.markdown("""
-Aplikasi ini menggunakan model *Random Forest* untuk memprediksi risiko Dengue berdasarkan data pemeriksaan hematologi pasien.
+Aplikasi ini dikembangkan untuk memprediksi kemungkinan terjadinya infeksi Dengue 
+Prediksi didasarkan pada data pemeriksaan hematologi rutin.
+
+Silakan masukkan hasil pemeriksaan laboratorium pasien untuk memperoleh estimasi probabilitas Dengue.
 """)
 
 with st.form("input_form"):
-    st.subheader("🔹 Masukkan Data Pemeriksaan Laboratorium")
+    st.subheader("Input Data Pemeriksaan Hematologi")
+
     Hemoglobin = st.number_input("Hemoglobin (g/dL)", min_value=5.0, max_value=20.0, value=13.0)
     Hematokrit = st.number_input("Hematokrit (%)", min_value=20.0, max_value=60.0, value=42.0)
     Leukosit = st.number_input("Leukosit (10³/uL)", min_value=0.5, max_value=30.0, value=6.0)
@@ -31,7 +36,7 @@ with st.form("input_form"):
     MCH = st.number_input("MCH (pg)", min_value=15.0, max_value=45.0, value=28.0)
     MCHC = st.number_input("MCHC (%)", min_value=20.0, max_value=40.0, value=33.0)
 
-    submitted = st.form_submit_button("🔍 Prediksi Dengue")
+    submitted = st.form_submit_button("Lakukan Prediksi")
 
 if submitted:
     # Data input
@@ -56,11 +61,11 @@ if submitted:
     prob = model.predict_proba(input_scaled)[0,1]
     pred_label = "POSITIF" if prob >=0.5 else "NEGATIF"
 
-    st.subheader("🔎 Hasil Prediksi")
-    st.write(f"**Probabilitas Dengue:** `{prob:.2f}` (Threshold: 0.5)")
-    st.write(f"**Prediksi:** `{pred_label}`")
+    st.subheader("Hasil Prediksi")
+    st.write(f"**Estimasi Probabilitas Dengue:** `{prob:.2f}` (Threshold: 0.5)")
+    st.write(f"**Interpretasi Prediksi:** `{pred_label}`")
 
     if prob >=0.5:
-        st.warning("⚠️ Risiko Dengue tinggi. Segera lakukan pemeriksaan lanjutan klinis dan laboratorium.")
+        st.warning("Hasil prediksi menunjukkan risiko Dengue yang tinggi. Pertimbangkan konfirmasi diagnosis dengan pemeriksaan klinis dan serologis.")
     else:
-        st.success("✅ Risiko Dengue rendah. Tetap monitor kondisi pasien.")
+        st.success("Hasil prediksi menunjukkan risiko Dengue yang rendah. Tetap lakukan monitoring sesuai protokol klinis.")
